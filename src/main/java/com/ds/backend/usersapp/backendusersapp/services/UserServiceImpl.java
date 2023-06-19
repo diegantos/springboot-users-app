@@ -34,6 +34,6 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public void remove(Long id) {
-        repository.deleteById();
+        repository.deleteById(id);
     }
 }
