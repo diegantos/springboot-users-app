@@ -3,6 +3,8 @@ package com.ds.backend.usersapp.backendusersapp.services;
 import com.ds.backend.usersapp.backendusersapp.models.entities.User;
 import com.ds.backend.usersapp.backendusersapp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +31,18 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public User save(User user) {
         return repository.save(user);
+    }
+
+    @Override
+    public Optional<User> update(User user, Long id) {
+        Optional<User> o = this.findById(id);
+        if (o.isPresent()){
+            User userDB = o.orElseThrow();
+            userDB.setUsername(user.getUsername());
+            userDB.setEmail(user.getEmail());
+            return Optional.of(this.save(userDB));
+        }
+        return Optional.empty();
     }
 
     @Override
