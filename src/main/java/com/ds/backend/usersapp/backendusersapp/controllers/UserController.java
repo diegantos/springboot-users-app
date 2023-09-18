@@ -2,6 +2,7 @@ package com.ds.backend.usersapp.backendusersapp.controllers;
 
 import com.ds.backend.usersapp.backendusersapp.models.entities.User;
 import com.ds.backend.usersapp.backendusersapp.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,12 +32,12 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody User user){
+    public ResponseEntity<?> create(@Valid @RequestBody User user){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(user));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody User user, @PathVariable Long id){
+    public ResponseEntity<?> update(@Valid @RequestBody User user, @PathVariable Long id){
         Optional<User> o = service.update(user, id);
         if (o.isPresent()){
             return ResponseEntity.status(HttpStatus.CREATED).body(o.orElseThrow());

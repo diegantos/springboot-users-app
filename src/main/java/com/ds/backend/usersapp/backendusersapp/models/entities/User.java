@@ -1,6 +1,9 @@
 package com.ds.backend.usersapp.backendusersapp.models.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.antlr.v4.runtime.misc.NotNull;
 
@@ -12,12 +15,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotEmpty
+    @Size(min = 4, max = 12)
     @Column(unique = true)
     private String username;
-    @NotNull
+
+    @NotEmpty
     private String password;
-    @NotNull
+
+    @NotEmpty
+    @Email
     @Column(unique = true)
     private String email;
 
