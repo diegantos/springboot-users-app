@@ -2,6 +2,7 @@ package com.ds.backend.usersapp.backendusersapp.models.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -15,12 +16,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
+    @NotBlank
     @Size(min = 4, max = 12)
     @Column(unique = true)
     private String username;
 
-    @NotEmpty
+    @NotBlank
     private String password;
 
     @NotEmpty
